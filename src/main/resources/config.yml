@@ -1,0 +1,20 @@
+# The welcome message to be displayed to players when they join the server.
+# You can use multiple lines by separating them with a hyphen (-).
+# Each line will be displayed as a separate message.
+# The messages will be sent in the order they are defined here.
+# You can use color codes (e.g., &a for green) to customize the appearance of the messages.
+# Example: "&aHello, &bWelcome to the server!"
+# You can write %user% to replace it with the player's name.
+config:
+  welcomeMessage:
+    # Whether the welcome message is enabled or not. Boolean value.
+    enabled: true
+    # The prefix to be displayed before the welcome message. Boolean value.
+    prefix: true
+    message:
+      - "&a&m                                   "
+      - ""
+      - "&fWelcome %user% to the server!"
+      - "&fWe hope you have a great time playing :)"
+      - ""
+      - "&a&m                                   "

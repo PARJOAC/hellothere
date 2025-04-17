@@ -1,0 +1,10 @@
+name: HelloThere
+version: 0.0.1
+main: com.hellothere.App
+api-version: 1.13
+author: ACParjo
+
+commands:
+  hellothere:
+    description: "Main command for HelloThere plugin."
+    usage: /hellothere
