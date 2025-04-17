@@ -59,7 +59,7 @@ public class App extends JavaPlugin {
 
     public void updateChecker() {
         try {
-            URL url = new URL("https://api.spigotmc.org/legacy/update.php?resource=41736");
+            URL url = new URL("https://api.spigotmc.org/legacy/update.php?resource=124156");
             HttpURLConnection con = (HttpURLConnection) url.openConnection();
             int timeout = 1250;
             con.setConnectTimeout(timeout);
@@ -75,7 +75,7 @@ public class App extends JavaPlugin {
                             "&cThere is a new version available. &e(&7" + latestversion + "&e)"));
     
                     Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
-                            "&cYou can download it at: &fhttps://www.spigotmc.org/resources/41736/"));
+                            "&cYou can download it at: &fhttps://www.spigotmc.org/resources/124156/"));
                 }
             }
         } catch (Exception ex) {
