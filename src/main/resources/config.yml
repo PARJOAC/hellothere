@@ -6,6 +6,9 @@
 # Example: "&aHello, &bWelcome to the server!"
 # You can write %user% to replace it with the player's name.
 config:
+  # The firework effect to be displayed when a player joins the server.
+  firework:
+    enabled: true
   welcomeMessage:
     # Whether the welcome message is enabled or not. Boolean value.
     enabled: true

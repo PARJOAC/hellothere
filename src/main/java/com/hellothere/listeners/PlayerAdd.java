@@ -35,7 +35,8 @@ public class PlayerAdd implements Listener {
         Player player = event.getPlayer();
         List<String> welcomeMessage = plugin.getMainConfigManager().getWelcomeMessages();
 
-        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled()) return;
+        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled())
+            return;
 
         for (String message : welcomeMessage) {
             if (plugin.getMainConfigManager().isWelcomeMessagePrefix()) {
@@ -44,8 +45,10 @@ public class PlayerAdd implements Listener {
             player.sendMessage(MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
         }
 
-        // Lanzar fuegos artificiales
-        spawnFirework(player.getLocation());
+        // Spawn firework if enabled
+        if (plugin.getMainConfigManager().isEnabledFirework())
+            spawnFirework(player.getLocation());
+
     }
 
     private void spawnFirework(Location location) {

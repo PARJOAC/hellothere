@@ -16,6 +16,7 @@ public class MainConfigManager {
     private List<String> welcomeMessages = new ArrayList<>();
     private boolean welcomeMessageEnabled;
     private boolean welcomeMessagePrefix;
+    private boolean enabledFirework;
 
     private String missingPermission;
     private String noConsole;
@@ -49,6 +50,7 @@ public class MainConfigManager {
         welcomeMessageEnabled = config.getBoolean("config.welcomeMessage.enabled");
         welcomeMessages = config.getStringList("config.welcomeMessage.message");
         welcomeMessagePrefix = config.getBoolean("config.welcomeMessage.prefix");
+        enabledFirework = config.getBoolean("config.firework.enabled");
 
         /**
          * Language messages
@@ -69,6 +71,10 @@ public class MainConfigManager {
 
     public List<String> getWelcomeMessages() {
         return welcomeMessages;
+    }
+
+    public boolean isEnabledFirework() {
+        return enabledFirework;
     }
 
     public boolean isWelcomeMessageEnabled() {
