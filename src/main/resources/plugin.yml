@@ -1,8 +1,9 @@
 name: HelloThere
-version: 0.0.2
+version: 0.0.21
 main: com.hellothere.App
 api-version: 1.13
 author: ACParjo
+description: "Welcome plugin for Minecraft servers."
 
 commands:
   hellothere:

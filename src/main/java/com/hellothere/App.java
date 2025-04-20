@@ -62,7 +62,7 @@ public class App extends JavaPlugin {
     public void updateChecker() {
         Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
             try {
-                URL url = new URL("https://api.spigotmc.org/simple/0.1/index.php?action=getResource&id=124156");
+                URL url = new URL("https://api.spiget.org/v2/resources/124156/versions/latest");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
                 con.setRequestProperty("User-Agent", "HelloThere-Plugin/1.0 (by ACPARJO)");
@@ -80,7 +80,7 @@ public class App extends JavaPlugin {
                 String json = jsonBuilder.toString();
     
                 // Extract the "current_version" field
-                Pattern pattern = Pattern.compile("\"current_version\"\\s*:\\s*\"([^\"]+)\"");
+                Pattern pattern = Pattern.compile("name\":\"([^\"]+)\"");
                 Matcher matcher = pattern.matcher(json);
                 if (matcher.find()) {
                     String latestVersion = matcher.group(1);
