@@ -2,5 +2,4 @@ prefix: "&6[&eHelloThere&6]&7 "
 noConsole: "This command cannot be executed from the console."
 missingPermission: "You do not have permission to use this command. Missing permission:"
 invalidCommand: 'Incorrect command usage. Use "/hellothere help" for more information.'
-helpMessage: "&f&l-------- &6&l HelloThere Help &f&l--------"
 reloadMessage: "&cConfiguration reloaded successfully!"

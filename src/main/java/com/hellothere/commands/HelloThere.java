@@ -21,13 +21,16 @@ public class HelloThere implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
+            if (args[0].toLowerCase().equals("reload")) {
+                reload(sender);
+                return true;
+            }
             sender.sendMessage(MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getNoConsole()));
             return true;
         }
 
         if (args.length == 0) {
-            sender.sendMessage(MessageUtils
-                    .getColoredMessagePrefix(plugin.getMainConfigManager().getInvalidCommand()));
+            info(sender);
             return true;
         }
 
@@ -36,6 +39,9 @@ public class HelloThere implements CommandExecutor {
             case "help":
                 help(sender);
                 break;
+            case "info":
+                info(sender);
+                break;
             case "reload":
                 requiredPermission = "hellothere.commands.reload";
                 if (!sender.hasPermission(requiredPermission)) {
@@ -43,9 +49,8 @@ public class HelloThere implements CommandExecutor {
                             DefaultMessage.missingPermission(requiredPermission));
                     return true;
                 }
-                plugin.getMainConfigManager().reloadConfig();
-                sender.sendMessage(
-                        MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getReloadMessage()));
+
+                reload(sender);
                 break;
             default:
                 sender.sendMessage(MessageUtils
@@ -56,9 +61,25 @@ public class HelloThere implements CommandExecutor {
     }
 
     private void help(CommandSender sender) {
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getHelpMessage()));
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /welcome help"));
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /welcome reload"));
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getHelpMessage()));
+        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /hellothere help"));
+        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /hellothere reload"));
+        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+    }
+
+    private void info(CommandSender sender) {
+        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7Version: &a" + plugin.getDescription().getVersion()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7Author: &a" + plugin.getDescription().getAuthors()));
+        sender.sendMessage(
+                MessageUtils.getColoredMessage("&7Description: &a" + plugin.getDescription().getDescription()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7More help: &a/hellothere help"));
+        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+    }
+
+    private void reload(CommandSender sender) {
+        plugin.getMainConfigManager().reloadConfig();
+        sender.sendMessage(
+                MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getReloadMessage()));
     }
 }

@@ -20,7 +20,6 @@ public class MainConfigManager {
     private String missingPermission;
     private String noConsole;
     private String invalidCommand;
-    private String helpMessage;
     private String reloadMessage;
     private String prefix;
 
@@ -58,7 +57,6 @@ public class MainConfigManager {
         missingPermission = messages.getString("missingPermission");
         noConsole = messages.getString("noConsole");
         invalidCommand = messages.getString("invalidCommand");
-        helpMessage = messages.getString("helpMessage");
         reloadMessage = messages.getString("reloadMessage");
         prefix = messages.getString("prefix");
     }
@@ -91,10 +89,6 @@ public class MainConfigManager {
 
     public String getInvalidCommand() {
         return invalidCommand;
-    }
-
-    public String getHelpMessage() {
-        return helpMessage;
     }
 
     public String getReloadMessage() {
