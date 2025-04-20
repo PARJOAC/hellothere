@@ -28,7 +28,7 @@ public class App extends JavaPlugin {
         mainConfigManager = new MainConfigManager(this);
         prefix = mainConfigManager.getPrefix();
         updateChecker();
-        
+
         Bukkit.getConsoleSender()
                 .sendMessage(MessageUtils
                         .getColoredMessagePrefix("&aStarting " + getName() + " v" + version + " on "
@@ -64,16 +64,16 @@ public class App extends JavaPlugin {
             int timeout = 1250;
             con.setConnectTimeout(timeout);
             con.setReadTimeout(timeout);
-    
+
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                 latestversion = reader.readLine();
             }
-    
+
             if (latestversion != null && !latestversion.trim().isEmpty()) {
                 if (!version.equals(latestversion)) {
                     Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
                             "&cThere is a new version available. &e(&7" + latestversion + "&e)"));
-    
+
                     Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
                             "&cYou can download it at: &fhttps://www.spigotmc.org/resources/124156/"));
                 }

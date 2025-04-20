@@ -42,7 +42,13 @@ public class PlayerAdd implements Listener {
             if (plugin.getMainConfigManager().isWelcomeMessagePrefix()) {
                 message = plugin.getMainConfigManager().getPrefix() + message;
             }
-            player.sendMessage(MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
+
+            if (plugin.getMainConfigManager().isBroadcast()) {
+                plugin.getServer().broadcastMessage(
+                        MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
+            } else {
+                player.sendMessage(MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
+            }
         }
 
         // Spawn firework if enabled

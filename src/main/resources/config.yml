@@ -14,6 +14,9 @@ config:
     enabled: true
     # The prefix to be displayed before the welcome message. Boolean value.
     prefix: true
+    # The message sent to player or bradcasted to all players when they join the server. Boolean value.
+    broadcast:
+      enabled: false
     message:
       - "&a&m                                   "
       - ""
