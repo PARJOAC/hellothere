@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -58,30 +60,44 @@ public class App extends JavaPlugin {
     }
 
     public void updateChecker() {
-        try {
-            URL url = new URL("https://api.spigotmc.org/legacy/update.php?resource=124156");
-            HttpURLConnection con = (HttpURLConnection) url.openConnection();
-            int timeout = 1250;
-            con.setConnectTimeout(timeout);
-            con.setReadTimeout(timeout);
-
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
-                latestversion = reader.readLine();
-            }
-
-            if (latestversion != null && !latestversion.trim().isEmpty()) {
-                if (!version.equals(latestversion)) {
-                    Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
-                            "&cThere is a new version available. &e(&7" + latestversion + "&e)"));
-
-                    Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
-                            "&cYou can download it at: &fhttps://www.spigotmc.org/resources/124156/"));
+        Bukkit.getScheduler().runTaskAsynchronously(this, () -> {
+            try {
+                URL url = new URL("https://api.spigotmc.org/simple/0.1/index.php?action=getResource&id=124156");
+                HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                con.setRequestMethod("GET");
+                con.setRequestProperty("User-Agent", "HelloThere-Plugin/1.0 (by ACPARJO)");
+                con.setConnectTimeout(1500);
+                con.setReadTimeout(1500);
+    
+                StringBuilder jsonBuilder = new StringBuilder();
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        jsonBuilder.append(line);
+                    }
                 }
+    
+                String json = jsonBuilder.toString();
+    
+                // Extract the "current_version" field
+                Pattern pattern = Pattern.compile("\"current_version\"\\s*:\\s*\"([^\"]+)\"");
+                Matcher matcher = pattern.matcher(json);
+                if (matcher.find()) {
+                    String latestVersion = matcher.group(1);
+                    if (!version.equalsIgnoreCase(latestVersion)) {
+                        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
+                                "&cA new version is available: &e" + latestVersion));
+                        Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
+                                "&cDownload it here: &fhttps://www.spigotmc.org/resources/124156/"));
+                    }
+                }
+    
+            } catch (Exception e) {
+                Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
+                        "&cError while checking for updates: " + e.getMessage()));
             }
-        } catch (Exception ex) {
-            Bukkit.getConsoleSender().sendMessage(
-                    MessageUtils.getColoredMessagePrefix("&cError while checking update."));
-        }
+        });
     }
+    
 
 }
