@@ -65,7 +65,7 @@ public class App extends JavaPlugin {
                 URL url = new URL("https://api.spiget.org/v2/resources/124156/versions/latest");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
-                con.setRequestProperty("User-Agent", "HelloThere-Plugin/1.0 (by ACPARJO)");
+                con.setRequestProperty("User-Agent", "HelloThere-Plugin/0.0.21");
                 con.setConnectTimeout(1500);
                 con.setReadTimeout(1500);
     

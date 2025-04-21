@@ -31,7 +31,7 @@ public class PlayerAdd implements Listener {
             return;
         event.setJoinMessage(null);
         
-        // Mensaje de bienvenida
+        // Welcome message
         Player player = event.getPlayer();
         List<String> welcomeMessage = plugin.getMainConfigManager().getWelcomeMessages();
 
