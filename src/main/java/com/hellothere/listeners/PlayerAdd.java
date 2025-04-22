@@ -80,10 +80,10 @@ public class PlayerAdd implements Listener {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("%user%", player.getName());
+        placeholders.put("%displayName%", player.getDisplayName());
         placeholders.put("%onlinePlayers%", String.valueOf(plugin.getServer().getOnlinePlayers().size()));
         placeholders.put("%maxPlayers%", String.valueOf(plugin.getServer().getMaxPlayers()));
         placeholders.put("%totalPlayersBanned%", String.valueOf(plugin.getServer().getBannedPlayers().size()));
-        placeholders.put("%displayName%", player.getDisplayName());
 
         for (String line : welcomeMessage) {
             String message = line;
