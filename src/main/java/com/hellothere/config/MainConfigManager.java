@@ -16,8 +16,12 @@ public class MainConfigManager {
     private List<String> welcomeMessages = new ArrayList<>();
     private boolean welcomeMessageEnabled;
     private boolean welcomeMessagePrefix;
-    private boolean enabledFirework;
     private boolean broadcast;
+
+    private boolean enabledFirework;
+    private String fireworkColor;
+    private String fireworkFade;
+    private String fireworkType;
 
     private String missingPermission;
     private String noConsole;
@@ -53,6 +57,9 @@ public class MainConfigManager {
         welcomeMessagePrefix = config.getBoolean("config.welcomeMessage.prefix");
         enabledFirework = config.getBoolean("config.firework.enabled");
         broadcast = config.getBoolean("config.welcomeMessage.broadcast.enabled");
+        fireworkColor = config.getString("config.firework.config.color");
+        fireworkFade = config.getString("config.firework.config.fade");
+        fireworkType = config.getString("config.firework.config.type");
 
         /**
          * Language messages
@@ -109,6 +116,17 @@ public class MainConfigManager {
 
     public String getPrefix() {
         return prefix;
+    }
+
+    public String getFireworkColor() {
+        return fireworkColor;
+    }
+
+    public String getFireworkFade() {
+        return fireworkFade;
+    }
+    public String getFireworkType() {
+        return fireworkType;
     }
 
 }

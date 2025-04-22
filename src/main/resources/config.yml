@@ -3,6 +3,40 @@ config:
   # The firework effect to be displayed when a player joins the server.
   firework:
     enabled: true
+    config:
+      # Type of the firework effect.
+      # Valid values:
+      #   - BALL
+      #   - BALL_LARGE
+      #   - BURST
+      #   - CREEPER
+      #   - STAR
+      type: BALL_LARGE
+
+      # Main color of the effect.
+      # Valid values:
+      #   - AQUA
+      #   - BLACK
+      #   - BLUE
+      #   - FUCHSIA
+      #   - GRAY
+      #   - GREEN
+      #   - LIME
+      #   - MAROON
+      #   - NAVY
+      #   - OLIVE
+      #   - ORANGE
+      #   - PURPLE
+      #   - RED
+      #   - SILVER
+      #   - TEAL
+      #   - WHITE
+      #   - YELLOW
+      color: TEAL
+
+      # Color the effect fades to after the initial color.
+      # Must be one of the same values listed under "color".
+      fade: WHITE
   welcomeMessage:
     # Whether the welcome message is enabled or not. Boolean value.
     enabled: true

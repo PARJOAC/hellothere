@@ -21,6 +21,42 @@ import com.hellothere.utils.MessageUtils;
 
 public class PlayerAdd implements Listener {
 
+    public static Map<String, Color> getColorMap() {
+        return colorMap;
+    }
+
+    // Usar HashMap en lugar de Map.of
+    private static final Map<String, Color> colorMap = new HashMap<>();
+    private static final Map<String, Type> typeMap = new HashMap<>();
+
+    static {
+        // Rellenar el colorMap
+        colorMap.put("AQUA", Color.AQUA);
+        colorMap.put("BLACK", Color.BLACK);
+        colorMap.put("BLUE", Color.BLUE);
+        colorMap.put("FUCHSIA", Color.FUCHSIA); // Color magenta como alternativa
+        colorMap.put("GRAY", Color.GRAY);
+        colorMap.put("GREEN", Color.GREEN);
+        colorMap.put("LIME", Color.LIME); // Color lime es el mismo que GREEN en AWT
+        colorMap.put("MAROON", Color.MAROON);
+        colorMap.put("NAVY", Color.NAVY);  // No hay Color.NAVY en AWT, se utiliza BLUE
+        colorMap.put("OLIVE", Color.OLIVE); // Color alternativo
+        colorMap.put("ORANGE", Color.ORANGE);
+        colorMap.put("PURPLE", Color.PURPLE);
+        colorMap.put("RED", Color.RED);
+        colorMap.put("SILVER", Color.SILVER); // Color similar
+        colorMap.put("TEAL", Color.TEAL); // Color teal es similar al cyan
+        colorMap.put("WHITE", Color.WHITE);
+        colorMap.put("YELLOW", Color.YELLOW);
+
+        // Rellenar el typeMap
+        typeMap.put("BALL", Type.BALL);
+        typeMap.put("BALL_LARGE", Type.BALL_LARGE);
+        typeMap.put("BURST", Type.BURST);
+        typeMap.put("CREEPER", Type.CREEPER);
+        typeMap.put("STAR", Type.STAR);
+    }
+
     private App plugin;
 
     public PlayerAdd(App plugin) {
@@ -85,15 +121,25 @@ public class PlayerAdd implements Listener {
         Firework firework = world.spawn(location, Firework.class);
         FireworkMeta meta = firework.getFireworkMeta();
 
+        Color fireworkColor = getFireworkColor(plugin.getMainConfigManager().getFireworkColor());
+        Color fireworkFade = getFireworkColor(plugin.getMainConfigManager().getFireworkFade());
+        Type fireworkType = getFireworkType(plugin.getMainConfigManager().getFireworkType());
         meta.addEffect(FireworkEffect.builder()
-                .withColor(Color.AQUA)
-                .withFade(Color.PURPLE)
-                .with(Type.BALL_LARGE)
+                .withColor(fireworkColor)
+                .withFade(fireworkFade)
+                .with(fireworkType)
                 .trail(true)
                 .flicker(true)
                 .build());
-
-        meta.setPower(1);
         firework.setFireworkMeta(meta);
+
+    }
+
+    public static Color getFireworkColor(String colorString) {
+        return colorMap.getOrDefault(colorString.toUpperCase(), Color.WHITE);
+    }
+
+    public static Type getFireworkType(String colorString) {
+        return typeMap.getOrDefault(colorString.toUpperCase(), Type.BALL_LARGE);
     }
 }

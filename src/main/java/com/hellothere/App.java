@@ -53,6 +53,7 @@ public class App extends JavaPlugin {
 
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerAdd(this), this);
+
     }
 
     public MainConfigManager getMainConfigManager() {
