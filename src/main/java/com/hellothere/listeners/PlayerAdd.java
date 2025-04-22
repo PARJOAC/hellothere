@@ -1,6 +1,8 @@
 package com.hellothere.listeners;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
@@ -27,40 +29,58 @@ public class PlayerAdd implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled())
+        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled()) {
             return;
+        }
         event.setJoinMessage(null);
 
         // Welcome message
         Player player = event.getPlayer();
         List<String> welcomeMessage = plugin.getMainConfigManager().getWelcomeMessages();
 
-        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled())
+        if (!plugin.getMainConfigManager().isWelcomeMessageEnabled()) {
             return;
+        }
 
-        for (String message : welcomeMessage) {
+        Map<String, String> placeholders = new HashMap<>();
+        placeholders.put("%user%", player.getName());
+        placeholders.put("%onlinePlayers%", String.valueOf(plugin.getServer().getOnlinePlayers().size()));
+        placeholders.put("%maxPlayers%", String.valueOf(plugin.getServer().getMaxPlayers()));
+        placeholders.put("%totalPlayersBanned%", String.valueOf(plugin.getServer().getBannedPlayers().size()));
+        placeholders.put("%displayName%", player.getDisplayName());
+
+        for (String line : welcomeMessage) {
+            String message = line;
+
             if (plugin.getMainConfigManager().isWelcomeMessagePrefix()) {
                 message = plugin.getMainConfigManager().getPrefix() + message;
             }
 
+            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
+                message = message.replace(entry.getKey(), entry.getValue());
+            }
+
+            String colored = MessageUtils.getColoredMessage(message);
+
             if (plugin.getMainConfigManager().isBroadcast()) {
-                plugin.getServer().broadcastMessage(
-                        MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
+                plugin.getServer().broadcastMessage(colored);
             } else {
-                player.sendMessage(MessageUtils.getColoredMessage(message.replaceAll("%user%", player.getName())));
+                player.sendMessage(colored);
             }
         }
 
         // Spawn firework if enabled
-        if (plugin.getMainConfigManager().isEnabledFirework())
+        if (plugin.getMainConfigManager().isEnabledFirework()) {
             spawnFirework(player.getLocation());
+        }
 
     }
 
     private void spawnFirework(Location location) {
         World world = location.getWorld();
-        if (world == null)
+        if (world == null) {
             return;
+        }
 
         Firework firework = world.spawn(location, Firework.class);
         FireworkMeta meta = firework.getFireworkMeta();

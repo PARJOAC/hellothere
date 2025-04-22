@@ -5,9 +5,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.hellothere.utils.MessageUtils;
 import com.hellothere.App;
 import com.hellothere.utils.DefaultMessage;
+import com.hellothere.utils.MessageUtils;
 
 public class HelloThere implements CommandExecutor {
 
@@ -21,11 +21,11 @@ public class HelloThere implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if (!(sender instanceof Player)) {
-            if (args[0].toLowerCase().equals("reload")) {
+            if (args.length > 0 && args[0].equalsIgnoreCase("reload")) {
                 reload(sender);
-                return true;
+            } else {
+                sender.sendMessage(MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getNoConsole()));
             }
-            sender.sendMessage(MessageUtils.getColoredMessagePrefix(plugin.getMainConfigManager().getNoConsole()));
             return true;
         }
 
@@ -61,20 +61,19 @@ public class HelloThere implements CommandExecutor {
     }
 
     private void help(CommandSender sender) {
-        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /hellothere help"));
-        sender.sendMessage(MessageUtils.getColoredMessagePrefix("&7- /hellothere reload"));
-        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9&l======== &b" + plugin.getName() + " &9&l========"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &e/hellothere help &7- &fShow this help message"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &e/hellothere reload &7- &fReload the configuration"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9&l============================"));
     }
 
     private void info(CommandSender sender) {
-        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
-        sender.sendMessage(MessageUtils.getColoredMessage("&7Version: &a" + plugin.getDescription().getVersion()));
-        sender.sendMessage(MessageUtils.getColoredMessage("&7Author: &a" + plugin.getDescription().getAuthors()));
-        sender.sendMessage(
-                MessageUtils.getColoredMessage("&7Description: &a" + plugin.getDescription().getDescription()));
-        sender.sendMessage(MessageUtils.getColoredMessage("&7More help: &a/hellothere help"));
-        sender.sendMessage(MessageUtils.getColoredMessage("-------- " + plugin.getName() + " --------"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9&l======== &b" + plugin.getName() + " &9&l========"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &eVersion: &a" + plugin.getDescription().getVersion()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &eAuthor: &a" + plugin.getDescription().getAuthors()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &eDescription: &a" + plugin.getDescription().getDescription()));
+        sender.sendMessage(MessageUtils.getColoredMessage("&7» &eMore help: &b/hellothere help"));
+        sender.sendMessage(MessageUtils.getColoredMessage("&9&l============================"));
     }
 
     private void reload(CommandSender sender) {

@@ -1,13 +1,13 @@
 package com.hellothere.config;
 
+import java.io.File;
+import java.io.IOException;
+
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import com.hellothere.App;
-
-import java.io.File;
-import java.io.IOException;
 
 public class CustomConfig {
     private App plugin;
@@ -56,9 +56,7 @@ public class CustomConfig {
         fileConfiguration = new YamlConfiguration();
         try {
             fileConfiguration.load(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (InvalidConfigurationException e) {
+        } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
     }
