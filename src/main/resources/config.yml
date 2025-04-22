@@ -61,6 +61,7 @@ config:
       - "&a&m                                   "
       - ""
       - "&6&l» &eWelcome &a%user% &eto the server!"
+      - "&7Your display name is %displayName%"
       - "&7We hope you have a &agreat time &7playing &o:)"
       - "&7Online: &a%onlinePlayers% &8/ &a%maxPlayers% &7players"
       - "&c⚠ &7Banned Players: &c%totalPlayersBanned%"
