@@ -36,9 +36,10 @@ public class MainConfigManager {
          */
         customConfig = new CustomConfig("config.yml", null, plugin, false);
         customConfig.registerConfig();
+
         /**
-         * Language messages
-         * This file is used to store all the messages that will be used in the plugin.
+         * Language messages This file is used to store all the messages that
+         * will be used in the plugin.
          */
         customMessages = new CustomConfig("lang.yml", null, plugin, false);
         customMessages.registerConfig();
@@ -52,11 +53,18 @@ public class MainConfigManager {
          * Main configuration
          */
         FileConfiguration config = customConfig.getConfig();
+        /**
+         * Welcome message configuration
+         */
         welcomeMessageEnabled = config.getBoolean("config.welcomeMessage.enabled");
         welcomeMessages = config.getStringList("config.welcomeMessage.message");
         welcomeMessagePrefix = config.getBoolean("config.welcomeMessage.prefix");
-        enabledFirework = config.getBoolean("config.firework.enabled");
         broadcast = config.getBoolean("config.welcomeMessage.broadcast.enabled");
+
+        /**
+         * Firework configuration
+         */
+        enabledFirework = config.getBoolean("config.firework.enabled");
         fireworkColor = config.getString("config.firework.config.color");
         fireworkFade = config.getString("config.firework.config.fade");
         fireworkType = config.getString("config.firework.config.type");
@@ -89,7 +97,7 @@ public class MainConfigManager {
     public boolean isBroadcast() {
         return broadcast;
     }
-    
+
     public boolean isWelcomeMessageEnabled() {
         return welcomeMessageEnabled;
     }
@@ -125,6 +133,7 @@ public class MainConfigManager {
     public String getFireworkFade() {
         return fireworkFade;
     }
+
     public String getFireworkType() {
         return fireworkType;
     }

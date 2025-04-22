@@ -1,5 +1,5 @@
 name: HelloThere
-version: 0.0.3
+version: 0.0.35
 main: com.hellothere.App
 api-version: 1.13
 author: ACParjo

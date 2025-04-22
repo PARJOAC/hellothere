@@ -52,7 +52,6 @@ config:
     #List of variables to be replaced in the message.
     # You can use the following variables:
     # %user% - The name of the player who joined the server.
-    # %displayName% - The display name of the player who joined the server.
     # %onlinePlayers% - The number of players currently online.
     # %maxPlayers% - The maximum number of players allowed on the server.
     # %totalPlayersBanned% - The total number of players banned on the server.
@@ -61,7 +60,6 @@ config:
       - "&a&m                                   "
       - ""
       - "&6&l» &eWelcome &a%user% &eto the server!"
-      - "&7Your display name is %displayName%"
       - "&7We hope you have a &agreat time &7playing &o:)"
       - "&7Online: &a%onlinePlayers% &8/ &a%maxPlayers% &7players"
       - "&c⚠ &7Banned Players: &c%totalPlayersBanned%"

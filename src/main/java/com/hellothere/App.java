@@ -1,6 +1,7 @@
 package com.hellothere;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,7 +21,6 @@ public class App extends JavaPlugin {
     public static String prefix;
     private String version = getDescription().getVersion();
     private MainConfigManager mainConfigManager;
-    private String latestversion;
 
     @Override
     public void onEnable() {
@@ -66,7 +66,7 @@ public class App extends JavaPlugin {
                 URL url = new URL("https://api.spiget.org/v2/resources/124156/versions/latest");
                 HttpURLConnection con = (HttpURLConnection) url.openConnection();
                 con.setRequestMethod("GET");
-                con.setRequestProperty("User-Agent", "HelloThere-Plugin/0.0.21");
+                con.setRequestProperty("User-Agent", "HelloThere-Plugin/0.0.3");
                 con.setConnectTimeout(1500);
                 con.setReadTimeout(1500);
     
@@ -93,7 +93,7 @@ public class App extends JavaPlugin {
                     }
                 }
     
-            } catch (Exception e) {
+            } catch (IOException e) {
                 Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
                         "&cError while checking for updates: " + e.getMessage()));
             }

@@ -25,31 +25,28 @@ public class PlayerAdd implements Listener {
         return colorMap;
     }
 
-    // Usar HashMap en lugar de Map.of
     private static final Map<String, Color> colorMap = new HashMap<>();
     private static final Map<String, Type> typeMap = new HashMap<>();
 
     static {
-        // Rellenar el colorMap
         colorMap.put("AQUA", Color.AQUA);
         colorMap.put("BLACK", Color.BLACK);
         colorMap.put("BLUE", Color.BLUE);
-        colorMap.put("FUCHSIA", Color.FUCHSIA); // Color magenta como alternativa
+        colorMap.put("FUCHSIA", Color.FUCHSIA);
         colorMap.put("GRAY", Color.GRAY);
         colorMap.put("GREEN", Color.GREEN);
-        colorMap.put("LIME", Color.LIME); // Color lime es el mismo que GREEN en AWT
+        colorMap.put("LIME", Color.LIME);
         colorMap.put("MAROON", Color.MAROON);
-        colorMap.put("NAVY", Color.NAVY);  // No hay Color.NAVY en AWT, se utiliza BLUE
-        colorMap.put("OLIVE", Color.OLIVE); // Color alternativo
+        colorMap.put("NAVY", Color.NAVY);
+        colorMap.put("OLIVE", Color.OLIVE);
         colorMap.put("ORANGE", Color.ORANGE);
         colorMap.put("PURPLE", Color.PURPLE);
         colorMap.put("RED", Color.RED);
-        colorMap.put("SILVER", Color.SILVER); // Color similar
-        colorMap.put("TEAL", Color.TEAL); // Color teal es similar al cyan
+        colorMap.put("SILVER", Color.SILVER);
+        colorMap.put("TEAL", Color.TEAL);
         colorMap.put("WHITE", Color.WHITE);
         colorMap.put("YELLOW", Color.YELLOW);
 
-        // Rellenar el typeMap
         typeMap.put("BALL", Type.BALL);
         typeMap.put("BALL_LARGE", Type.BALL_LARGE);
         typeMap.put("BURST", Type.BURST);
@@ -80,7 +77,6 @@ public class PlayerAdd implements Listener {
 
         Map<String, String> placeholders = new HashMap<>();
         placeholders.put("%user%", player.getName());
-        placeholders.put("%displayName%", player.getDisplayName());
         placeholders.put("%onlinePlayers%", String.valueOf(plugin.getServer().getOnlinePlayers().size()));
         placeholders.put("%maxPlayers%", String.valueOf(plugin.getServer().getMaxPlayers()));
         placeholders.put("%totalPlayersBanned%", String.valueOf(plugin.getServer().getBannedPlayers().size()));
@@ -114,9 +110,6 @@ public class PlayerAdd implements Listener {
 
     private void spawnFirework(Location location) {
         World world = location.getWorld();
-        if (world == null) {
-            return;
-        }
 
         Firework firework = world.spawn(location, Firework.class);
         FireworkMeta meta = firework.getFireworkMeta();
@@ -131,7 +124,11 @@ public class PlayerAdd implements Listener {
                 .trail(true)
                 .flicker(true)
                 .build());
+
         firework.setFireworkMeta(meta);
+        plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+            firework.detonate();
+        }, 2L);
 
     }
 
