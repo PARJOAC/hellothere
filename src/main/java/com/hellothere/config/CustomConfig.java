@@ -10,6 +10,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import com.hellothere.App;
 
 public class CustomConfig {
+
     private App plugin;
     private String fileName;
     private FileConfiguration fileConfiguration = null;

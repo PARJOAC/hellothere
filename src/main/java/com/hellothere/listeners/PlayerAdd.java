@@ -67,7 +67,6 @@ public class PlayerAdd implements Listener {
         }
         event.setJoinMessage(null);
 
-        // Welcome message
         Player player = event.getPlayer();
         List<String> welcomeMessage = plugin.getMainConfigManager().getWelcomeMessages();
 
@@ -101,7 +100,6 @@ public class PlayerAdd implements Listener {
             }
         }
 
-        // Spawn firework if enabled
         if (plugin.getMainConfigManager().isEnabledFirework()) {
             spawnFirework(player.getLocation());
         }

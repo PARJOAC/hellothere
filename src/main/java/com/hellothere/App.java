@@ -24,7 +24,6 @@ public class App extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
         registerCommands();
         registerEvents();
         mainConfigManager = new MainConfigManager(this);
@@ -40,7 +39,6 @@ public class App extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
         Bukkit.getConsoleSender()
                 .sendMessage(MessageUtils
                         .getColoredMessagePrefix("&cClosing " + getName() + " v" + version + " on "
@@ -69,7 +67,7 @@ public class App extends JavaPlugin {
                 con.setRequestProperty("User-Agent", "HelloThere-Plugin/0.0.3");
                 con.setConnectTimeout(1500);
                 con.setReadTimeout(1500);
-    
+
                 StringBuilder jsonBuilder = new StringBuilder();
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
                     String line;
@@ -77,10 +75,9 @@ public class App extends JavaPlugin {
                         jsonBuilder.append(line);
                     }
                 }
-    
+
                 String json = jsonBuilder.toString();
-    
-                // Extract the "current_version" field
+
                 Pattern pattern = Pattern.compile("name\":\"([^\"]+)\"");
                 Matcher matcher = pattern.matcher(json);
                 if (matcher.find()) {
@@ -92,13 +89,12 @@ public class App extends JavaPlugin {
                                 "&cDownload it here: &fhttps://www.spigotmc.org/resources/124156/"));
                     }
                 }
-    
+
             } catch (IOException e) {
                 Bukkit.getConsoleSender().sendMessage(MessageUtils.getColoredMessagePrefix(
                         "&cError while checking for updates: " + e.getMessage()));
             }
         });
     }
-    
 
 }
