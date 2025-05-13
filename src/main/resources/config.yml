@@ -48,21 +48,35 @@ config:
     # You can use multiple lines by separating them with a hyphen (-).
     # You can use color codes (e.g., &a for green) to customize the appearance of the messages.
     # The messages will be sent in the order they are defined here.
-
-    #List of variables to be replaced in the message.
-    # You can use the following variables:
-    # %user% - The name of the player who joined the server.
-    # %onlinePlayers% - The number of players currently online.
-    # %maxPlayers% - The maximum number of players allowed on the server.
-    # %totalPlayersBanned% - The total number of players banned on the server.
-    # You can write %user% to replace it with the player's name.
+    # You can use PlacerHolderAPI to use variables
     message:
       - "&a&m                                   "
       - ""
-      - "&6&l» &eWelcome &a%user% &eto the server!"
+      - "&6&l» &eWelcome &a%player_name% &eto the server!"
       - "&7We hope you have a &agreat time &7playing &o:)"
-      - "&7Online: &a%onlinePlayers% &8/ &a%maxPlayers% &7players"
-      - "&c⚠ &7Banned Players: &c%totalPlayersBanned%"
+      - "&7Online: &a%server_online% &8/ &a%server_max_players% &7players"
       - "&b✦ &fHave &9fun &fand &9enjoy &fthe &9adventure!"
       - ""
       - "&a&m                                   "
+  farewallMessage:
+    # Whether the farewall message is enabled or not. Boolean value.
+    enabled: true
+    # The prefix to be displayed before the farewall message. Boolean value.
+    prefix: false
+    # The message sent to player or bradcasted to all players when they leave the server. Boolean value.
+    broadcast:
+      enabled: false
+    # You can use multiple lines by separating them with a hyphen (-).
+    # You can use color codes (e.g., &a for green) to customize the appearance of the messages.
+    # The messages will be sent in the order they are defined here.
+    # You can use PlacerHolderAPI to use variables
+    message:
+      - "&a&m                                   "
+      - ""
+      - "&6&l» &eThe player &a%player_name% &ehas left the server!"
+      - "&7We hope you had a &agreat time &7playing &o:)"
+      - "&7Online: &a%server_online% &8/ &a%server_max_players% &7players"
+      - "&b✦ &fCome back &9soon&f, your &9adventure &fisn't over yet!"
+      - ""
+      - "&a&m                                   "
+

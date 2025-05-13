@@ -19,6 +19,8 @@ import org.bukkit.inventory.meta.FireworkMeta;
 import com.hellothere.App;
 import com.hellothere.utils.MessageUtils;
 
+import me.clip.placeholderapi.PlaceholderAPI;
+
 public class PlayerAdd implements Listener {
 
     public static Map<String, Color> getColorMap() {
@@ -74,12 +76,6 @@ public class PlayerAdd implements Listener {
             return;
         }
 
-        Map<String, String> placeholders = new HashMap<>();
-        placeholders.put("%user%", player.getName());
-        placeholders.put("%onlinePlayers%", String.valueOf(plugin.getServer().getOnlinePlayers().size()));
-        placeholders.put("%maxPlayers%", String.valueOf(plugin.getServer().getMaxPlayers()));
-        placeholders.put("%totalPlayersBanned%", String.valueOf(plugin.getServer().getBannedPlayers().size()));
-
         for (String line : welcomeMessage) {
             String message = line;
 
@@ -87,13 +83,13 @@ public class PlayerAdd implements Listener {
                 message = plugin.getMainConfigManager().getPrefix() + message;
             }
 
-            for (Map.Entry<String, String> entry : placeholders.entrySet()) {
-                message = message.replace(entry.getKey(), entry.getValue());
+            if (plugin.getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
+                message = PlaceholderAPI.setPlaceholders(player, message);
             }
 
             String colored = MessageUtils.getColoredMessage(message);
 
-            if (plugin.getMainConfigManager().isBroadcast()) {
+            if (plugin.getMainConfigManager().isBroadcastWelcome()) {
                 plugin.getServer().broadcastMessage(colored);
             } else {
                 player.sendMessage(colored);

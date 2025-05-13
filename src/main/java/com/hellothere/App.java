@@ -14,6 +14,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import com.hellothere.commands.HelloThere;
 import com.hellothere.config.MainConfigManager;
 import com.hellothere.listeners.PlayerAdd;
+import com.hellothere.listeners.PlayerRemove;
 import com.hellothere.utils.MessageUtils;
 
 public class App extends JavaPlugin {
@@ -24,17 +25,24 @@ public class App extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        registerCommands();
-        registerEvents();
-        mainConfigManager = new MainConfigManager(this);
-        prefix = mainConfigManager.getPrefix();
-        updateChecker();
+        if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") == null) {
+            Bukkit.getConsoleSender()
+                    .sendMessage(MessageUtils
+                            .getColoredMessagePrefix("&cError: PlaceholderAPI is not installed. Disabling plugin."));
+            getServer().getPluginManager().disablePlugin(this);
+            return;
+        }
 
         Bukkit.getConsoleSender()
                 .sendMessage(MessageUtils
                         .getColoredMessagePrefix("&aStarting " + getName() + " v" + version + " on "
                                 + getServer().getName() + " " + getServer().getVersion()));
 
+        registerCommands();
+        registerEvents();
+        mainConfigManager = new MainConfigManager(this);
+        prefix = mainConfigManager.getPrefix();
+        updateChecker();
     }
 
     @Override
@@ -51,7 +59,7 @@ public class App extends JavaPlugin {
 
     public void registerEvents() {
         getServer().getPluginManager().registerEvents(new PlayerAdd(this), this);
-
+        getServer().getPluginManager().registerEvents(new PlayerRemove(this), this);
     }
 
     public MainConfigManager getMainConfigManager() {

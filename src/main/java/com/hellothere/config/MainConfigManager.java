@@ -16,7 +16,12 @@ public class MainConfigManager {
     private List<String> welcomeMessages = new ArrayList<>();
     private boolean welcomeMessageEnabled;
     private boolean welcomeMessagePrefix;
-    private boolean broadcast;
+    private boolean broadcastWelcome;
+
+    private List<String> farewallMessages = new ArrayList<>();
+    private boolean farewallMessageEnabled;
+    private boolean farewallMessagePrefix;
+    private boolean broadcastFarewall;
 
     private boolean enabledFirework;
     private String fireworkColor;
@@ -47,7 +52,12 @@ public class MainConfigManager {
         welcomeMessageEnabled = config.getBoolean("config.welcomeMessage.enabled");
         welcomeMessages = config.getStringList("config.welcomeMessage.message");
         welcomeMessagePrefix = config.getBoolean("config.welcomeMessage.prefix");
-        broadcast = config.getBoolean("config.welcomeMessage.broadcast.enabled");
+        broadcastWelcome = config.getBoolean("config.welcomeMessage.broadcast.enabled");
+
+        farewallMessageEnabled = config.getBoolean("config.farewallMessage.enabled");
+        farewallMessages = config.getStringList("config.farewallMessage.message");
+        farewallMessagePrefix = config.getBoolean("config.farewallMessage.prefix");
+        broadcastFarewall = config.getBoolean("config.farewallMessage.broadcast.enabled");
 
         enabledFirework = config.getBoolean("config.firework.enabled");
         fireworkColor = config.getString("config.firework.config.color");
@@ -76,8 +86,8 @@ public class MainConfigManager {
         return enabledFirework;
     }
 
-    public boolean isBroadcast() {
-        return broadcast;
+    public boolean isBroadcastWelcome() {
+        return broadcastWelcome;
     }
 
     public boolean isWelcomeMessageEnabled() {
@@ -119,5 +129,23 @@ public class MainConfigManager {
     public String getFireworkType() {
         return fireworkType;
     }
+
+    public List<String> getFarewallMessages() {
+        return farewallMessages;
+    }
+
+    public boolean isFarewallMessageEnabled() {
+        return farewallMessageEnabled;
+    }
+
+    public boolean isFarewallMessagePrefix() {
+        return farewallMessagePrefix;
+    }
+
+    public boolean isBroadcastFarewall() {
+        return broadcastFarewall;
+    }
+
+    
 
 }
